@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beranda, Jadwal, dan Lainnya</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            border: 1px solid #ffffff;
+            display: flex;
+            flex-direction: column;
+        }
+        .header, .class-header {
+            text-align: center;
+            padding: 10px;
+        }
+        .header {
+            font-size: 24px;
+        }
+        .class-header {
+            font-size: 20px;
+            border-top: 1px solid #ffffff;
+            border-bottom: 1px solid #ffffff;
+        }
+        .calendar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 10px;
+        }
+        .calendar div {
+            width: 40px;
+            height: 40px;
+            margin: 5px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            background-color: #2c3e50;
+        }
+        .calendar .today {
+            background-color: #2ecc71; /* Warna hijau untuk hari ini */
+        }
+        .calendar .weekend {
+            background-color: #e74c3c;
+        }
+        .student-list {
+            flex-grow: 1;
+            overflow-y: auto; /* Menambahkan scroll hanya pada daftar siswa */
+            padding: 10px;
+        }
+        .student {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #ffffff;
+        }
+        .student img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #2c3e50;
+            margin-right: 10px;
+        }
+        .student-info {
+            font-size: 14px;
+        }
+        .footer {
+            display: flex;
+            justify-content: space-around;
+            border-top: 1px solid #ffffff;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 400px;
+            background-color: #121212;
+        }
+        .footer div {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .home-content, .schedule, .more {
+            display: none;
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 60px;
+        }
+        .home-content.active, .schedule.active, .more.active {
+            display: block;
+        }
+        .schedule-content {
+            padding: 20px;
+            font-size: 16px;
+            line-height: 1.5;
+            border: 1px solid #ffffff;
+            border-radius: 8px;
+            background-color: #1c1c1c;
+            margin: 10px;
+        }
+        .day-header {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #3498db;
+        }
+    </style>
+    <script>
+        function showContent(content) {
+            document.querySelector('.home-content').classList.remove('active');
+            document.querySelector('.schedule').classList.remove('active');
+            document.querySelector('.more').classList.remove('active');
+            document.querySelector('.' + content).classList.add('active');
+        }
+
+        function highlightToday() {
+            const today = new Date();
+            const day = today.getDate();
+            const dayDivs = document.querySelectorAll('.calendar .day');
+            dayDivs.forEach(div => {
+                if (parseInt(div.textContent) === day) {
+                    div.classList.add('today');
+                } else {
+                    div.classList.remove('today');
+                }
+            });
+        }
+
+        window.onload = highlightToday;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- Beranda (Home Content) -->
+        <div class="home-content active">
+            <div class="header">November</div>
+            <div class="calendar">
+                <div class="day">1</div>
+                <div class="day">2</div>
+                <div class="day">3</div>
+                <div class="day">4</div>
+                <div class="day">5</div>
+                <div class="day">6</div>
+                <div class="day">7</div>
+                <div class="day">8</div>
+                <div class="day">9</div>
+                <div class="day">10</div>
+                <div class="day">11</div>
+                <div class="day">12</div>
+                <div class="day">13</div>
+                <div class="day">14</div>
+                <div class="day">15</div>
+                <div class="day">16</div>
+                <div class="day">17</div>
+                <div class="day">18</div>
+                <div class="day">19</div>
+                <div class="day">20</div>
+                <div class="day">21</div>
+                <div class="day">22</div>
+                <div class="day">23</div>
+                <div class="day">24</div>
+                <div class="day">25</div>
+                <div class="day">26</div>
+                <div class="day">27</div>
+                <div class="day">28</div>
+                <div class="day">29</div>
+                <div class="day">30</div>
+            </div>
+            <div class="class-header">Kelas 9A</div>
+            <div class="student-list">
+                <!-- Daftar 2 Siswa -->
+             <div class="student">
+                <img src="images/0.jpg" alt="Siswa 1">
+                <div class="student-info">
+                    <div style="font-size: 18px;">Wali kelas: Bu Fitria</div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+                <div class="student">
+                    <img src="images/ahnaf.jpg" alt="Siswa 1">
+                    <div class="student-info">
+                        <div>Nama: Ahnaf fakhri M</div>
+                        <div>No Absen: 1</div>
+                        <div>Pelajaran Favorit: IPS. PPKN</div>
+                        <div>Pelajaran Dikuasai: IPS</div>
+                    </div>
+                </div>
+                <div class="student">
+                    <img src="images/Akmal.jpg" alt="Siswa 2">
+                    <div class="student-info">
+                        <div>Nama: Akmal fajar N</div>
+                        <div>No Absen: 2</div>
+                        <div>Pelajaran Favorit: PAI</div>
+                        <div>Pelajaran Dikuasai: IPA</div>
+                    </div>
+                </div>
+                                <div class="student">
+                    <img src="images/0.jpg" alt="Siswa 1">
+                    <div class="student-info">
+                        <div>Nama: Almira kanya dewi S</div>
+                        <div>No Absen: 3</div>
+                        <div>Pelajaran Favorit: ...</div>
+                        <div>Pelajaran Dikuasai: ...</div>
+                    </div>
+                </div>
+                <div class="student">
+                    <img src="images/anggi.jpg" alt="Siswa 2">
+                    <div class="student-info">
+                        <div>Nama: Anggi puspita dwie A</div>
+                        <div>No Absen: 4</div>
+                        <div>Pelajaran Favorit: Bahasa Inggris</div>
+                        <div>Pelajaran Dikuasai: bahasa Inggris</div>
+                    </div>
+                </div>
+                                <div class="student">
+                    <img src="images/Arvino.jpg" alt="Siswa 1">
+                    <div class="student-info">
+                        <div>Nama: Arvino nur zahran</div>
+                        <div>No Absen: 5</div>
+                        <div>Pelajaran Favorit: TIK</div>
+                        <div>Pelajaran Dikuasai: Bahasa inggris</div>
+                    </div>
+                </div>
+                <div class="student">
+                    <img src="images/0.jpg" alt="Siswa 2">
+                    <div class="student-info">
+                        <div>Nama: Aulia samudriani</div>
+                        <div>No Absen: 6</div>
+                        <div>Pelajaran Favorit: ...</div>
+                        <div>Pelajaran Dikuasai: ...</div>
+                    </div>
+                </div>
+                                <div class="student">
+                    <img src="images/chiara.jpg" alt="Siswa 1">
+                    <div class="student-info">
+                        <div>Nama: Chiara hasna H </div>
+                        <div>No Absen: 7</div>
+                        <div>Pelajaran Favorit: PPKN</div>
+                        <div>Pelajaran Dikuasai: Bahasa indonesia</div>
+                    </div>
+                </div>
+                <div class="student">
+                    <img src="images/0.jpg" alt="Siswa 2">
+                    <div class="student-info">
+                        <div>Nama: Daniesh adliansyah</div>
+                        <div>No Absen: 8</div>
+                        <div>Pelajaran Favorit: ...</div>
+                        <div>Pelajaran Dikuasai: ...</div>
+                    </div>
+                </div>
+                                <div class="student">
+                    <img src="images/0.jpg" alt="Siswa 1">
+                    <div class="student-info">
+                        <div>Nama: Dewa Rafael. G</div>
+                        <div>No Absen: 9</div>
+                        <div>Pelajaran Favorit: ...</div>
+                        <div>Pelajaran Dikuasai: ...</div>
+                    </div>
+                </div>
+               <div class="student">
+    <img src="images/dinda.jpg" alt="Siswa 1">
+    <div class="student-info">
+        <div>Nama: Dinda Rizki D</div>
+        <div>No Absen: 10</div>
+        <div>Pelajaran Favorit: ...</div>
+        <div>Pelajaran Dikuasai: ...</div>
+    </div>
+</div>
+<div class="student">
+    <img src="images/0.jpg" alt="Siswa 2">
+    <div class="student-info">
+        <div>Nama: Ebran jibril E</div>
+        <div>No Absen: 11</div>
+        <div>Pelajaran Favorit: ...</div>
+        <div>Pelajaran Dikuasai: ...</div>
+    </div>
+</div>
+<div class="student">
+    <img src="images/0.jpg" alt="Siswa 1">
+    <div class="student-info">
+        <div>Nama: fadil asyam M</div>
+        <div>No Absen: 12</div>
+        <div>Pelajaran Favorit: ...</div>
+        <div>Pelajaran Dikuasai: ...</div>
+    </div>
+</div>
+<div class="student">
+    <img src="images/jesica.jpg" alt="Siswa 2">
+    <div class="student-info">
+        <div>Nama: jesica Kania D</div>
+        <div>No Absen: 13</div>
+        <div>Pelajaran Favorit: PPKN</div>
+        <div>Pelajaran Dikuasai: Bahasa Indonesia</div>
+    </div>
+</div>
+<div class="student">
+    <img src="images/kaira.jpg" alt="Siswa 1">
+    <div class="student-info">
+        <div>Nama: Keysia putri N</div>
+        <div>No Absen: 14</div>
+        <div>Pelajaran Favorit: Bahasa inggris</div>
+        <div>Pelajaran Dikuasai: Bahasa inggris</div>
+    </div>
+</div>
+<div class="student">
+    <img src="images/0.jpg" alt="Siswa 2">
+    <div class="student-info">
+        <div>Nama: Lanang maulana P.D</div>
+        <div>No Absen: 15</div>
+        <div>Pelajaran Favorit: ...</div>
+        <div>Pelajaran Dikuasai: ...</div>
+    </div>
+</div>
+<div class="student">
+    <img src="images/hasby.jpg" alt="Siswa 1">
+    <div class="student-info">
+        <div>Nama: Mochamad hasby K.A</div>
+        <div>No Absen: 16</div>
+        <div>Pelajaran Favorit: MTK</div>
+        <div>Pelajaran Dikuasai: MTk</div>
+    </div>
+</div>
+<div class="student">
+    <img src="images/baldan.jpg" alt="Siswa 2">
+    <div class="student-info">
+        <div>Nama: Mohammad baldan R</div>
+        <div>No Absen: 17</div>
+        <div>Pelajaran Favorit: Prakarya</div>
+        <div>Pelajaran Dikuasai: IPS</div>
+    </div>
+</div>
+<div class="student">
+    <img src="images/fahri.jpg" alt="Siswa 1">
+    <div class="student-info">
+        <div>Nama: Mohammad fachri</div>
+        <div>No Absen: 18</div>
+        <div>Pelajaran Favorit: IPS. PAI. PPKN. B indo. Prakarya. B sunda</div>
+        <div>Pelajaran Dikuasai: PPKN. IPS</div>
+    </div>
+</div>
+<div class="student">
+    <img src="images/0.jpg" alt="Siswa 2">
+    <div class="student-info">
+        <div>Nama: Muhammad faris R A P</div>
+        <div>No Absen: 19</div>
+        <div>Pelajaran Favorit: ...</div>
+        <div>Pelajaran Dikuasai: ...</div>
+    </div>
+</div>
+<div class="student">
+    <img src="images/fauji.jpg" alt="Siswa 1">
+    <div class="student-info">
+        <div>Nama: Muhammad fauzi zulfa</div>
+        <div>No Absen: 20</div>
+        <div>Pelajaran Favorit: PPKN</div>
+        <div>Pelajaran Dikuasai: PPKN</div>
+    </div>
+</div>
+<div class="student">
+    <img src="images/iqbal.jpg" alt="Siswa 2">
+    <div class="student-info">
+        <div>Nama: Muhammad iqbal R</div>
+        <div>No Absen: 21</div>
+        <div>Pelajaran Favorit: PJOK</div>
+        <div>Pelajaran Dikuasai: LOMPAT HARIMAU 🐅        </div>
+    </div>
+</div>
+<div class="student">
+    <img src="images/0.jpg" alt="Siswa 1">
+    <div class="student-info">
+        <div>Nama: Muhammad zaki</div>
+        <div>No Absen: 22</div>
+        <div>Pelajaran Favorit: ...</div>
+        <div>Pelajaran Dikuasai: ...</div>
+    </div>
+</div>
+<div class="student">
+    <img src="images/0.jpg" alt="Siswa 2">
+    <div class="student-info">
+        <div>Nama: Nindya adya K</div>
+        <div>No Absen: 23</div>
+        <div>Pelajaran Favorit: ...</div>
+        <div>Pelajaran Dikuasai: ...</div>
+    </div>
+</div>
+<div class="student">
+    <img src="images/rehan.jpg" alt="Siswa 1">
+    <div class="student-info">
+        <div>Nama: Raihan Rafa R</div>
+        <div>No Absen: 24</div>
+        <div>Pelajaran Favorit: B sunda. PPKN. SBK</div>
+        <div>Pelajaran Dikuasai: TIK</div>
+    </div>
+</div>
+<div class="student">
+    <img src="images/11.jpg" alt="Siswa 2">
+    <div class="student-info">
+        <div>Nama: Raisyha aura A</div>
+        <div>No Absen: 25</div>
+        <div>Pelajaran Favorit: MTK</div>
+        <div>Pelajaran Dikuasai: MTK</div>
+    </div>
+</div>
+<div class="student">
+    <img src="images/repan.jpg" alt="Siswa 1">
+    <div class="student-info">
+        <div>Nama: Repan Saputra</div>
+        <div>No Absen: 26</div>
+        <div>Pelajaran Favorit: PPKN</div>
+        <div>Pelajaran Dikuasai: PPKN</div>
+    </div>
+</div>
+<div class="student">
+    <img src="images/RA2K.jpg" alt="Siswa 2">
+    <div class="student-info">
+        <div>Nama: Ridho arrayan A.S🥶        </div>
+        <div>No Absen: 27</div>
+        <div>Pelajaran Favorit: Informatika. PJOK</div>
+        <div>Pelajaran Dikuasai: Informatika </div>
+    </div>
+</div>
+<div class="student">
+    <img src="images/0.jpg" alt="Siswa 1">
+    <div class="student-info">
+        <div>Nama: Sansan</div>
+        <div>No Absen: 28</div>
+        <div>Pelajaran Favorit: ...</div>
+        <div>Pelajaran Dikuasai: ...</div>
+    </div>
+</div>
+<div class="student">
+    <img src="images/shifa.jpg" alt="Siswa 2">
+    <div class="student-info">
+        <div>Nama: Shifa intan K</div>
+        <div>No Absen: 29</div>
+        <div>Pelajaran Favorit: Informatika</div>
+        <div>Pelajaran Dikuasai: B indo. Informatika</div>
+    </div>
+</div>
+<div class="student">
+    <img src="images/0.jpg" alt="Siswa 1">
+    <div class="student-info">
+        <div>Nama: Sri susilo S Y</div>
+        <div>No Absen: 30</div>
+        <div>Pelajaran Favorit: ...</div>
+        <div>Pelajaran Dikuasai: ...</div>
+    </div>
+</div>
+<div class="student">
+    <img src="images/0.jpg" alt="Siswa 2">
+    <div class="student-info">
+        <div>Nama: youmi A P</div>
+        <div>No Absen: 31</div>
+        <div>Pelajaran Favorit: ...</div>
+        <div>Pelajaran Dikuasai: ...</div>
+    </div>
+</div>
+<div class="student">
+    <img src="images/0.jpg" alt="Siswa 2">
+    <div class="student-info">
+        <div>Nama: zaidan nazwa N</div>
+        <div>No Absen: 32</div>
+        <div>Pelajaran Favorit: ...</div>
+        <div>Pelajaran Dikuasai: ...</div>
+    </div>
+</div>
+           <!--siswa-->
+            </div>
+        </div>
+        
+        <!-- Jadwal -->
+        <div class="schedule">
+            <div class="header">Jadwal</div>
+            <div class="schedule-content">
+                <div class="day-header">Senin</div>
+                <div>IPS, MTK, PAI</div>
+                
+                <div class="day-header">Selasa</div>
+                <div>Sunda, SBK, Indo</div>
+                
+                <div class="day-header">Rabu</div>
+                <div>IPA, MTK, Inggris</div>
+                
+                <div class="day-header">Kamis</div>
+                <div>PJOK, IPA, TIK, Indo </div>
+                
+                <div class="day-header">Jumat</div>
+                <div>PKN, TIK</div>
+            </div>
+        </div>
+
+<div class="more">
+    <div class="header">Foto foto kenangan kelas 9A</div>
+    <div class="schedule-content">
+        <div class="student-list">
+            <div class="student" style="justify-content: center;">
+                <a href="images/1.jpg" data-lightbox="image-1">
+                    <img src="images/1.jpg" alt="Siswa 1" style="width: 200px; height: 150px; object-fit: cover;">
+                </a>
+            </div>
+            <div class="student" style="justify-content: center;">
+                <a href="images/2.jpg" data-lightbox="image-2">
+                    <img src="images/2.jpg" alt="Siswa 2" style="width: 200px; height: 150px; object-fit: cover;">
+                </a>
+            </div>
+            <div class="student" style="justify-content: center;">
+                <a href="images/3.jpg" data-lightbox="image-3">
+                    <img src="images/3.jpg" alt="Siswa 3" style="width: 200px; height: 150px; object-fit: cover;">
+                </a>
+            </div>
+            <div class="student" style="justify-content: center;">
+                <a href="images/4.jpg" data-lightbox="image-4">
+                    <img src="images/4.jpg" alt="Siswa 4" style="width: 200px; height: 150px; object-fit: cover;">
+                </a>
+            </div>
+            <div class="student" style="justify-content: center;">
+                <a href="images/5.jpg" data-lightbox="image-5">
+                    <img src="images/5.jpg" alt="Siswa 5" style="width: 200px; height: 150px; object-fit: cover;">
+                </a>
+            </div>
+            <div class="student" style="justify-content: center;">
+                <a href="images/6.jpg" data-lightbox="image-6">
+                    <img src="images/6.jpg" alt="Siswa 6" style="width: 200px; height: 150px; object-fit: cover;">
+                </a>
+            </div>
+            <div class="student" style="justify-content: center;">
+                <a href="images/12.jpg" data-lightbox="image-7">
+                    <img src="images/12.jpg" alt="Siswa 7" style="width: 200px; height: 150px; object-fit: cover;">
+                </a>
+            </div>
+            <div class="student" style="justify-content: center;">
+                <a href="images/8.jpg" data-lightbox="image-8">
+                    <img src="images/8.jpg" alt="Siswa 8" style="width: 200px; height: 150px; object-fit: cover;">
+                </a>
+            </div>
+            <div class="student" style="justify-content: center;">
+                <a href="images/9.jpg" data-lightbox="image-9">
+                    <img src="images/9.jpg" alt="Siswa 9" style="width: 200px; height: 150px; object-fit: cover;">
+                </a>
+            </div>
+            <div class="student" style="justify-content: center;">
+                <a href="images/10.jpg" data-lightbox="image-10">
+                    <img src="images/10.jpg" alt="Siswa 10" style="width: 200px; height: 150px; object-fit: cover;">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+        
+        <!-- Footer Navigasi -->
+        <div class="footer">
+            <div onclick="showContent('home-content')">Beranda</div>
+            <div onclick="showContent('schedule')">Jadwal</div>
+            <div onclick="showContent('more')">Lainnya</div>
+        </div>
+    </div>
+</body>
+</html>
